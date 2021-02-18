@@ -38,7 +38,7 @@ $conn->close();
     <textarea type="text" name="password" id="pwd" ></textarea>
     <form action="result.php" method="post">
         <input type="submit" value="提交" /><br />
-        歌名：<input type="text" name="song" value="请输入歌名" id="111" /><br />
+        歌名：<input type="text" name="songs" value="请输入歌名" id="111" /><br />
         <br />
         <br />
         立意：<select name="content"><?php echo $ret[1]; ?></select> 风格：<select name="style"><?php echo $ret[0]; ?> </select> <br />
@@ -46,8 +46,7 @@ $conn->close();
         时期：<select name="period"> <?php echo $ret[4]; ?> </select> 地区：<select name="region"><?php echo $ret[5]; ?> </select> <br />
         <br />
         <br />
-        <input type="radio" name="accompany" value="0" checked="true"/>无伴奏
-        <input type="radio" name="accompany" value="1" />有伴奏<br />
+        <input type="checkbox" name="accompany" value="accompany"> 有伴奏<br />
         <br />
         <input type="radio" name="part" value="4" />男声
         <input type="radio" name="part" value="6" />女声<br />
@@ -58,11 +57,7 @@ $conn->close();
 </html>
 <script>
     function foo() {
-        if (document.getElementById('pwd').value == 'password') {
-            window.location.href = 'add.php';
-        }
-        else {
-            document.getElementById('pwd').value = '密码错误';
-        }
+        if (document.getElementById('pwd').value == 'password') window.location.href = 'add.php';
+        else document.getElementById('pwd').value = '密码错误';
     }
 </script>
