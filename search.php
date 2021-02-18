@@ -4,7 +4,7 @@ $conn = new mysqli("localhost", "root", "", "fuga_songs");
 if($conn->connect_error) die("连接失败:" . $conn->connect_error);
 else echo "欢迎使用经年赋格歌曲查询系统<br />";
 
-$base = "<option value=\"0\"></option><option value=\"0\">不限</option>";
+$base = "<option value=\"0\">不限</option>";
 $search = array("style","content","language","source", "period", "region");
 $ret = array("","","","","","","");
 
@@ -41,15 +41,17 @@ $conn->close();
         歌名：<input type="text" name="song" value="请输入歌名" id="111" /><br />
         <br />
         <br />
-        立意：<select name="content" innerHTML="<?php echo $ret[1]; ?>"> </select> 风格：<select name="style" innerHTML="<?php echo $ret[0]; ?>"> </select> <br />
-        语言：<select name="language" innerHTML="<?php echo $ret[2]; ?>"> </select> 来源：<select name="source" innerHTML="<?php echo $ret[3]; ?>"> </select> <br />
-        时期：<select name="period" innerHTML="<?php echo $ret[4]; ?>"> </select> 地区：<select name="region" innerHTML="<?php echo $ret[5]; ?>"> </select> <br />
+        立意：<select name="content"><?php echo $ret[1]; ?></select> 风格：<select name="style"><?php echo $ret[0]; ?> </select> <br />
+        语言：<select name="language"> <?php echo $ret[2]; ?> </select> 来源：<select name="source"><?php echo $ret[3]; ?> </select> <br />
+        时期：<select name="period"> <?php echo $ret[4]; ?> </select> 地区：<select name="region"><?php echo $ret[5]; ?> </select> <br />
         <br />
         <br />
-        <input type="checkbox" name="accompany" value="accompany" />有伴奏<br />
-        <input type="radio" name="part" value="boy" />男声合唱
-        <input type="radio" name="part" value="girl" />女声合唱<br />
-        <input type="radio" name="part" value="mix" />混声合唱
+        <input type="radio" name="accompany" value="0" checked="true"/>无伴奏
+        <input type="radio" name="accompany" value="1" />有伴奏<br />
+        <br />
+        <input type="radio" name="part" value="4" />男声
+        <input type="radio" name="part" value="6" />女声<br />
+        <input type="radio" name="part" value="2" />混声
         <input type="radio" name="part" value="any" checked="true"/>不限<br />
     </form>
 </body>

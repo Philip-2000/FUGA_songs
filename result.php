@@ -17,20 +17,19 @@ $sql = 'SELECT song FROM relation';
 #make up the query
 $search = array("style","content","language","source", "period", "region");
 $ret = array("","","","","","","");
-$flag = 0;
+
+if($_POST['part'] == 'any'){
+    if($_POST['accompany'] == '1') $sql = $sql . " WHERE (part = 1 OR part = 3 OR part = 5)";
+    else  $sql = $sql . " WHERE (part = 2 OR part = 4 OR part = 6)";
+}
+else $sql = $sql . " WHERE part = " . ($_POST['part'] - $_POST['accompany']);
+echo $sql . "<br />";#debug print
+
 for($i = 0; $i < 6; $i += 1){
-    if($_POST[$search[$i]] != 0){
-        if($flag == 0){
-            $flag = 1;
-            $sql = $sql . " WHERE ";
-        }
-        else {
-            $sql = $sql . " AND ";
-        }
-        $sql = $sql . $search[$i] . "=" . $_POST[$search[$i]];
-    }
+    if($_POST[$search[$i]] != 0) $sql = $sql . " AND " . $search[$i] . "=" . $_POST[$search[$i]];
     echo $sql . "<br />"; #debug print
 }
+
 
 #query
 $result = $conn->query($sql);
